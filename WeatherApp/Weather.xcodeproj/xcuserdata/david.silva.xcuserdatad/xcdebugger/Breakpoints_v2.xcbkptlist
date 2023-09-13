@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "4CF2F67A-9788-4CBB-AA5B-2CD100EA6F90"
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4C726851-7462-4774-AF13-C145027AA1FF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Weather/Networking/NetworkingLayer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "fetchCities(searchTerm:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4C726851-7462-4774-AF13-C145027AA1FF - f1bf5d3ea597ab6b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Weather.NetworkingLayer.fetchCities(searchTerm: Swift.String) async throws -&gt; Swift.Array&lt;Weather.City&gt;"
+                  moduleName = "Weather"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/david.silva/WeatherApp/WeatherApp/Weather/Networking/NetworkingLayer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "876">
+               </Location>
+               <Location
+                  uuid = "4C726851-7462-4774-AF13-C145027AA1FF - bc1f89b02379cfc9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for Weather.NetworkingLayer.fetchCities(searchTerm: Swift.String) async throws -&gt; Swift.Array&lt;Weather.City&gt;"
+                  moduleName = "Weather"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/david.silva/WeatherApp/WeatherApp/Weather/Networking/NetworkingLayer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "4C726851-7462-4774-AF13-C145027AA1FF - 4be2f4f5ede86f69"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Weather.NetworkingLayer.fetchCities(searchTerm: Swift.String) async throws -&gt; Swift.Array&lt;Weather.City&gt;"
+                  moduleName = "Weather"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/david.silva/WeatherApp/WeatherApp/Weather/Networking/NetworkingLayer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "104">
+               </Location>
+               <Location
+                  uuid = "4C726851-7462-4774-AF13-C145027AA1FF - f6374310b1dc0d68"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Weather.NetworkingLayer.fetchCities(searchTerm: Swift.String) async throws -&gt; Swift.Array&lt;Weather.City&gt;"
+                  moduleName = "Weather"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/david.silva/WeatherApp/WeatherApp/Weather/Networking/NetworkingLayer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C5567E5C-B070-4C66-8190-139827B5F062"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Weather/Service/ServiceLayer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "fetchCities(searchTerm:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C5567E5C-B070-4C66-8190-139827B5F062 - 49a6d1849dab2fa5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Weather.ServiceLayer.fetchCities(searchTerm: Swift.String) async throws -&gt; Swift.Optional&lt;Swift.Array&lt;Weather.City&gt;&gt;"
+                  moduleName = "Weather"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/david.silva/WeatherApp/WeatherApp/Weather/Service/ServiceLayer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  uuid = "C5567E5C-B070-4C66-8190-139827B5F062 - 49a6d1849dab2fa5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Weather.ServiceLayer.fetchCities(searchTerm: Swift.String) async throws -&gt; Swift.Optional&lt;Swift.Array&lt;Weather.City&gt;&gt;"
+                  moduleName = "Weather"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/david.silva/WeatherApp/WeatherApp/Weather/Service/ServiceLayer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "42"
+                  endingLineNumber = "42"
+                  offsetFromSymbolStart = "144">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F7A272AD-5341-4532-A2FE-DDFCDD4837DE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Weather/Service/ServiceLayer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "fetchCities(searchTerm:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F7A272AD-5341-4532-A2FE-DDFCDD4837DE - d5443e71c4ecc104"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for Weather.ServiceLayer.fetchCities(searchTerm: Swift.String) async throws -&gt; Swift.Optional&lt;Swift.Array&lt;Weather.City&gt;&gt;"
+                  moduleName = "Weather"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/david.silva/WeatherApp/WeatherApp/Weather/Service/ServiceLayer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "152">
+               </Location>
+               <Location
+                  uuid = "F7A272AD-5341-4532-A2FE-DDFCDD4837DE - 892a7258c27b4015"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(2) await resume partial function for Weather.ServiceLayer.fetchCities(searchTerm: Swift.String) async throws -&gt; Swift.Optional&lt;Swift.Array&lt;Weather.City&gt;&gt;"
+                  moduleName = "Weather"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/david.silva/WeatherApp/WeatherApp/Weather/Service/ServiceLayer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "36">
+               </Location>
+               <Location
+                  uuid = "F7A272AD-5341-4532-A2FE-DDFCDD4837DE - 7b58a5955a878d3a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for Weather.ServiceLayer.fetchCities(searchTerm: Swift.String) async throws -&gt; Swift.Optional&lt;Swift.Array&lt;Weather.City&gt;&gt;"
+                  moduleName = "Weather"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/david.silva/WeatherApp/WeatherApp/Weather/Service/ServiceLayer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "F7A272AD-5341-4532-A2FE-DDFCDD4837DE - 49a6d1849dab2f39"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Weather.ServiceLayer.fetchCities(searchTerm: Swift.String) async throws -&gt; Swift.Optional&lt;Swift.Array&lt;Weather.City&gt;&gt;"
+                  moduleName = "Weather"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/david.silva/WeatherApp/WeatherApp/Weather/Service/ServiceLayer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "38"
+                  endingLineNumber = "38"
+                  offsetFromSymbolStart = "60">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
