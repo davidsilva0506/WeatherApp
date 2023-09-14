@@ -18,7 +18,7 @@ enum HTTPMethod: String {
 
 enum RequestParams {
 
-    case url(_ : [String: Any]?)
+    case URL(_ : [String: Any]?)
 }
 
 protocol Request {

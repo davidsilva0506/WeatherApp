@@ -1,5 +1,5 @@
 //
-//  LoadingView.swift
+//  Loading.swift
 //  Weather
 //
 //  Created by David Silva on 13/09/2023.
@@ -20,7 +20,7 @@ struct ActivityIndicator: UIViewRepresentable {
     func updateUIView(_ uiView: UIViewType, context: Context) {}
 }
 
-struct LoadingView: View {
+struct Loading: View {
     
     var body: some View {
         

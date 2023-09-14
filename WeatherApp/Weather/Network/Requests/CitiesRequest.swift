@@ -28,7 +28,7 @@ public struct CitiesRequest: Request {
 
     var parameters: RequestParams? {
 
-        return .url(["q": self.cityName,
+        return .URL(["q": self.cityName.escaped(),
                      "limit": Constants.requestLimit])
     }
 }

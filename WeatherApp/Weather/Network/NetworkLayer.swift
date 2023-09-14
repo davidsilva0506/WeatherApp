@@ -35,15 +35,7 @@ class NetworkLayer: NetworkLayerProtocol {
     
     func execute<T>(type: T.Type, request: Request) async throws -> T where T: Decodable  {
         
-        let URLRequest = try await self.buildURLRequest(for: request)
-        
-        let (data, response) = try await self.session.data(for: URLRequest)
-
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-
-            throw NetworkError.requestFailed
-        }
+        let data = try await self.data(for: request)
 
         do {
 
@@ -56,19 +48,41 @@ class NetworkLayer: NetworkLayerProtocol {
             throw NetworkError.parsingFailed
         }
     }
+    
+    func data(for request: Request, includeAppId: Bool = true) async throws -> Data {
+        
+        do {
+
+            let URLRequest = try await self.buildURLRequest(for: request, includeAppId: includeAppId)
+            
+            let (data, response) = try await self.session.data(for: URLRequest)
+            
+            guard let httpResponse = response as? HTTPURLResponse,
+                  httpResponse.statusCode == 200 else {
+
+                throw NetworkError.requestFailed
+            }
+            
+            return data
+
+        } catch {
+
+            throw NetworkError.requestFailed
+        }
+    }
 }
 
 private extension NetworkLayer {
-    
-    private func buildURLRequest(for request: Request) async throws -> URLRequest {
 
-        let urlString = "\(self.networkConfig.baseUrl)/\(request.path)"
+    private func buildURLRequest(for request: Request, includeAppId: Bool = true) async throws -> URLRequest {
+
+        let URLString = "\(self.networkConfig.baseURL)/\(request.path)"
         
-        guard let url = URL(string: urlString) else { throw NetworkError.invalidURL }
+        guard let URL = URL(string: URLString) else { throw NetworkError.invalidURL }
         
-        var urlRequest = URLRequest(url: url)
+        var URLRequest = URLRequest(url: URL)
         
-        if case .url(let params) = request.parameters {
+        if case .URL(let params) = request.parameters {
             
             guard let params = params as? [String: String] else { throw NetworkError.invalidData }
             
@@ -77,13 +91,13 @@ private extension NetworkLayer {
                 return URLQueryItem(name: param.key, value: param.value)
             }
             
-            guard var components = URLComponents(string: urlString) else { throw NetworkError.invalidData }
+            guard var components = URLComponents(string: URLString) else { throw NetworkError.invalidData }
             
             components.queryItems = queryItems
-            urlRequest.url = components.url
+            URLRequest.url = components.url
         }
         
-        guard let absoluteURLString = urlRequest.url?.absoluteString,
+        guard let absoluteURLString = URLRequest.url?.absoluteString,
               var components = URLComponents(string: absoluteURLString) else {
          
             throw NetworkError.invalidData
@@ -92,9 +106,9 @@ private extension NetworkLayer {
         var currentQueryItems = components.queryItems ?? [URLQueryItem]()
         currentQueryItems.append(URLQueryItem(name: "appid", value: self.networkConfig.apiKey))
         components.queryItems = currentQueryItems
-        urlRequest.url = components.url
-        urlRequest.httpMethod = request.method.rawValue
+        URLRequest.url = components.url
+        URLRequest.httpMethod = request.method.rawValue
 
-        return urlRequest
+        return URLRequest
     }
 }

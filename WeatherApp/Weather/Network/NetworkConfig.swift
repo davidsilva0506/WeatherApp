@@ -10,6 +10,6 @@ import Foundation
 struct NetworkConfig {
 
     let name: String
-    let baseUrl: String
+    let baseURL: String
     var apiKey: String
 }

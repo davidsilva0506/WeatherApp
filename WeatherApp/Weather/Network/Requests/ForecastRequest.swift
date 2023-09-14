@@ -29,7 +29,7 @@ public struct ForecastRequest: Request {
 
     var parameters: RequestParams? {
 
-        return .url(["lat": String(self.city.lat),
+        return .URL(["lat": String(self.city.lat),
                      "lon": String(self.city.lon),
                      "units": self.units])
     }

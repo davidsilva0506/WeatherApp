@@ -8,7 +8,7 @@
 import CoreLocation
 
 struct City: Decodable {
-    
+
     let name: String
     let lat: CLLocationDegrees
     let lon: CLLocationDegrees

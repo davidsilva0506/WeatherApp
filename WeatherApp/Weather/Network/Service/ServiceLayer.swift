@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 private enum Constants {
 
@@ -18,10 +19,12 @@ final class ServiceLayer: ServiceProtocol {
     
     internal let networkLayer: NetworkLayer
     
+    private let imageCache = NSCache<NSString, UIImage>()
+    
     init() {
 
         let config = NetworkConfig(name: Constants.serviceName,
-                                   baseUrl: Constants.baseURL,
+                                   baseURL: Constants.baseURL,
                                    apiKey: Constants.apiKey)
 
         self.networkLayer = NetworkLayer(networkConfig: config)
@@ -61,5 +64,28 @@ final class ServiceLayer: ServiceProtocol {
         }
         
         return forecast
+    }
+    
+    func fetchImage(iconString: String) async -> UIImage? {
+
+        if let cachedImage = imageCache.object(forKey: iconString as NSString) {
+
+            return cachedImage
+        }
+        
+        let imageRequest = ImageRequest(icon: iconString.appending(".png"))
+        
+        var icon: UIImage?
+            
+        let data = try? await self.networkLayer.data(for: imageRequest, includeAppId: false)
+            
+        if let data = data,
+            let image = UIImage(data: data) {
+                
+            icon = image
+            self.imageCache.setObject(image, forKey: iconString as NSString)
+        }
+
+        return icon
     }
 }
