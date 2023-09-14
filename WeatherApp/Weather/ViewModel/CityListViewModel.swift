@@ -10,10 +10,9 @@ import Foundation
 final class CityListViewModel: ObservableObject {
     
     private let service = ServiceLayer()
-    
-    var activeCity: City?
 
     @Published var activeSheet: Sheet?
+    @Published var activeCity: City?
     @Published var alertItem: AlertItem?
     @Published var cities: [City] = []
 

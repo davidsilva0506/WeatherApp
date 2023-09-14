@@ -9,7 +9,11 @@ import Foundation
 
 struct WeatherDay: Identifiable {
 
-    let id = UUID()
+    var id: String {
+    
+        return UUID().uuidString
+    }
+
     let day: String
     let forecast: [DayForecast]
 }

@@ -19,7 +19,11 @@ private enum Constants {
 
 struct PinnedCity: Identifiable {
 
-    let id = UUID()
+    var id: String {
+    
+        return UUID().uuidString
+    }
+
     let name: String
     let coordinates: CLLocationCoordinate2D
 }

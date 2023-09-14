@@ -34,7 +34,7 @@ struct CityListView: View {
                     switch sheet {
                         
                     case .cityDetailView:
-                        CityDetailView(city: viewModel.activeCity,
+                        CityDetailView(city: $viewModel.activeCity,
                                        activeSheet: $viewModel.activeSheet)
                     case .seetings:
                         SettingsView(activeSheet: $viewModel.activeSheet)
@@ -57,6 +57,7 @@ struct CityListView: View {
                 }
             }
             .searchable(text: $searchTerm)
+            .autocorrectionDisabled(true)
             .onChange(of: searchTerm) { value in
                 
                 Task {

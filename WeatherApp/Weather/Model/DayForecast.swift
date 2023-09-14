@@ -9,7 +9,11 @@ import Foundation
 
 struct DayForecast: Identifiable {
     
-    let id = UUID()
+    var id: String {
+    
+        return UUID().uuidString
+    }
+
     let time: String
     let temperature: Int
     let icon: String

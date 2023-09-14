@@ -10,11 +10,10 @@ import SwiftUI
 struct CityDetailView: View {
     
     @EnvironmentObject var settings: Settings
-    
-    var city: City?
 
     @StateObject var viewModel = CityDetailViewModel()
     
+    @Binding var city: City?
     @Binding var activeSheet: Sheet?
 
     var body: some View {
@@ -64,6 +63,6 @@ struct CityDetailView: View {
 
 struct CityDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        CityDetailView(activeSheet: .constant(nil))
+        CityDetailView(city: .constant(nil), activeSheet: .constant(nil))
     }
 }
