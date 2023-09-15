@@ -9,8 +9,7 @@ import Foundation
 
 struct CityWeather: Decodable {
     
-    let dt: Double
     let main: MainWeatherInfo
-    let weather: [Weather]
+    let weather: [WeatherInfo]
     let dt_txt: String
 }

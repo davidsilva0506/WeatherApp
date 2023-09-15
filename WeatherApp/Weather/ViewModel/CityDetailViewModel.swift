@@ -86,7 +86,7 @@ extension CityDetailViewModel {
             $0[$1.date, default: []].append($1.forecast)
         }
         
-        return forecastByDay.map { (day: String, forecast: [DayForecast]) in
+        return forecastByDay.map { (day, forecast) in
             
             return WeatherDay(day: day, forecast: forecast)
         }.sorted(by: { $0.day < $1.day })

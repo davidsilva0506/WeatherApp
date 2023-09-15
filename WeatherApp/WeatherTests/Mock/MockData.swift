@@ -9,37 +9,26 @@ import Foundation
 
 struct MockData {
     
-    static let data: [WeatherDay] = [sampleWeatherDay,
-                                     sampleWeatherDay2,
-                                     sampleWeatherDay3,
-                                     sampleWeatherDay4,
-                                     sampleWeatherDay5]
-
-    static let sampleDayForecast = DayForecast(time: "15h00",
-                                               temperature: 24,
-                                               icon: "01d")
+    static let mainWeatherInfoA = MainWeatherInfo(temp: 20.0)
+    static let weatherInfoA = WeatherInfo(id: 1, icon: "01d")
     
-    static let sampleForecast = [sampleDayForecast,
-                                 sampleDayForecast,
-                                 sampleDayForecast,
-                                 sampleDayForecast,
-                                 sampleDayForecast,
-                                 sampleDayForecast,
-                                 sampleDayForecast,
-                                 sampleDayForecast]
+    static let mainWeatherInfoB = MainWeatherInfo(temp: 24.0)
+    static let weatherInfoB = WeatherInfo(id: 2, icon: "01d")
     
-    static let sampleWeatherDay = WeatherDay(day: "Segunda",
-                                             forecast: sampleForecast)
+    static let mainWeatherInfoC = MainWeatherInfo(temp: 30.0)
+    static let weatherInfoC = WeatherInfo(id: 3, icon: "01d")
     
-    static let sampleWeatherDay2 = WeatherDay(day: "Terça",
-                                              forecast: sampleForecast)
+    static let cityWeatherA = CityWeather(main: mainWeatherInfoA,
+                                         weather: [weatherInfoA],
+                                         dt_txt: "2023-09-14 15:00:00")
     
-    static let sampleWeatherDay3 = WeatherDay(day: "Quarta",
-                                              forecast: sampleForecast)
+    static let cityWeatherB = CityWeather(main: mainWeatherInfoB,
+                                         weather: [weatherInfoB],
+                                         dt_txt: "2023-09-15 15:00:00")
     
-    static let sampleWeatherDay4 = WeatherDay(day: "Quinta",
-                                              forecast: sampleForecast)
+    static let cityWeatherC = CityWeather(main: mainWeatherInfoB,
+                                         weather: [weatherInfoB],
+                                         dt_txt: "2023-09-15 15:00:00")
     
-    static let sampleWeatherDay5 = WeatherDay(day: "Sexta",
-                                              forecast: sampleForecast)
+    static let forecast = Forecast(cnt: 3, list: [cityWeatherA, cityWeatherB, cityWeatherC])
 }
