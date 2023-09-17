@@ -18,12 +18,12 @@ final class CityListViewModel: ObservableObject {
 
     func search(searchTerm: String) async {
 
-        if let cities = try? await self.service.fetchCities(searchTerm: searchTerm) {
-                
-            self.cities = cities
+        do {
             
-        } else {
-        
+            cities = try await self.service.fetchCities(searchTerm: searchTerm) ?? []
+            
+        } catch {
+
             alertItem = AlertContext.requestFailed
         }
     }

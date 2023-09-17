@@ -12,6 +12,9 @@ private enum Constants {
 
     static let dateFormatter = DateFormatter()
     static let dateFormat = "yy/MM/dd HH:mm:ss"
+    static let entityName = "CityDetail"
+    static let predicateFormat = "name == %@"
+    static let assertionMessage = "Error getting saved cities."
 }
 
 @MainActor
@@ -62,13 +65,13 @@ final class CityDetailViewModel: ObservableObject {
 
         do {
             
-            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "CityDetail")
-            fetch.predicate = NSPredicate(format: "name == %@", city.name)
+            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.entityName)
+            fetch.predicate = NSPredicate(format: Constants.predicateFormat, city.name)
             numberOfRecords = try context.count(for: fetch)
             
         } catch {
             
-            print("error getting saved cities")
+            assertionFailure(Constants.assertionMessage)
         }
         
         return numberOfRecords > 0

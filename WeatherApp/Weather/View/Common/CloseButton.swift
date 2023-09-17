@@ -10,15 +10,16 @@ import SwiftUI
 
 struct CloseButton: View {
     
-    @EnvironmentObject var navigation: Navigation
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         
         Button {
            
-            navigation.activeSheet = nil
+            dismiss()
             
         } label: {
+            
             Image(systemName: "xmark")
                 .foregroundColor(.white)
                 .imageScale(.large)

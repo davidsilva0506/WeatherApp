@@ -10,6 +10,9 @@ import Foundation
 private enum Constants {
 
     static let requestLimit = "1"
+    static let path = "geo/1.0/direct"
+    static let cityParamKey = "q"
+    static let limitParamKey = "q"
 }
 
 public struct CitiesRequest: Request {
@@ -18,7 +21,7 @@ public struct CitiesRequest: Request {
     
     var path: String {
         
-        return "geo/1.0/direct"
+        return Constants.path
     }
 
     var method: HTTPMethod {
@@ -28,7 +31,7 @@ public struct CitiesRequest: Request {
 
     var parameters: RequestParams? {
 
-        return .URL(["q": self.cityName,
-                     "limit": Constants.requestLimit])
+        return .URL([Constants.cityParamKey: self.cityName,
+                     Constants.limitParamKey: Constants.requestLimit])
     }
 }

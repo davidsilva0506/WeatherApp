@@ -11,6 +11,8 @@ import CoreData
 private enum Constants {
 
     static let containerName = "Cities"
+    static let loadAssertionMessage = "Failed to load core data with error:"
+    static let saveAssertionMessage = "Failed to save the data with error:"
 }
 
 final class CoreDataService: ObservableObject {
@@ -27,7 +29,7 @@ final class CoreDataService: ObservableObject {
             
             if let error {
                 
-                assertionFailure("Failed to load core data with error: \(error.localizedDescription)")
+                assertionFailure("\(Constants.loadAssertionMessage)\(error.localizedDescription)")
             }
         }
     }
@@ -40,7 +42,7 @@ final class CoreDataService: ObservableObject {
             
         } catch {
             
-            assertionFailure("We could not save the data")
+            assertionFailure("\(Constants.saveAssertionMessage)\(error.localizedDescription)")
         }
     }
     

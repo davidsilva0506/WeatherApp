@@ -19,8 +19,6 @@ final class ServiceLayer: ServiceProtocol {
     
     internal let networkLayer: NetworkLayer
     
-    private let imageCache = NSCache<NSString, UIImage>()
-    
     init() {
 
         let config = NetworkConfig(name: Constants.serviceName,
@@ -68,12 +66,7 @@ final class ServiceLayer: ServiceProtocol {
     
     func fetchImage(iconString: String) async -> UIImage? {
 
-        if let cachedImage = imageCache.object(forKey: iconString as NSString) {
-
-            return cachedImage
-        }
-        
-        let imageRequest = ImageRequest(icon: iconString.appending(".png"))
+        let imageRequest = ImageRequest(icon: "\(iconString).png")
         
         var icon: UIImage?
             
@@ -83,7 +76,6 @@ final class ServiceLayer: ServiceProtocol {
             let image = UIImage(data: data) {
                 
             icon = image
-            self.imageCache.setObject(image, forKey: iconString as NSString)
         }
 
         return icon

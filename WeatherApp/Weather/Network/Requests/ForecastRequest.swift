@@ -9,7 +9,10 @@ import Foundation
 
 private enum Constants {
 
-    static let requestLimit = "1"
+    static let path = "data/2.5/forecast"
+    static let latParamKey = "lat"
+    static let lonParamKey = "lon"
+    static let unitsParamKey = "units"
 }
 
 public struct ForecastRequest: Request {
@@ -19,7 +22,7 @@ public struct ForecastRequest: Request {
     
     var path: String {
         
-        return "data/2.5/forecast"
+        return Constants.path
     }
 
     var method: HTTPMethod {
@@ -29,8 +32,8 @@ public struct ForecastRequest: Request {
 
     var parameters: RequestParams? {
 
-        return .URL(["lat": String(self.city.lat),
-                     "lon": String(self.city.lon),
-                     "units": self.units])
+        return .URL([Constants.latParamKey: String(self.city.lat),
+                     Constants.lonParamKey: String(self.city.lon),
+                     Constants.unitsParamKey: self.units])
     }
 }

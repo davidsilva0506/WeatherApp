@@ -10,6 +10,7 @@ import SwiftUI
 struct CityListView: View {
     
     @Environment(\.managedObjectContext) var context
+
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var navigation: Navigation
 
@@ -19,15 +20,23 @@ struct CityListView: View {
     @State private var searchTerm = ""
 
     var body: some View {
+        
         ZStack {
+            
             NavigationStack {
+                
                 List {
+                    
                     Section() {
+                        
                         ForEach(viewModel.cities, id: \.name) { city in
+                            
                             Button {
-                                viewModel.activeCity = city
-                                navigation.activeSheet = .cityDetailView
+                                
+                                selected(city: city)
+                                
                             } label: {
+                                
                                 Text("\(city.name), \(city.country)")
                                     .font(.body)
                                     .fontWeight(.semibold)
@@ -42,19 +51,19 @@ struct CityListView: View {
                     Section {
                         
                         ForEach(savedCities, id: \.name) { city in
+                            
                             Text("\(city.name), \(city.country)")
                                 .font(.body)
                                 .fontWeight(.semibold)
                                 .scaledToFit()
                                 .onTapGesture {
                                     
-                                    let cityToShow = City(name: city.name,
-                                                          lat: city.lat,
-                                                          lon: city.lon,
-                                                          country: city.country)
+                                    let selectedCity = City(name: city.name,
+                                                            lat: city.lat,
+                                                            lon: city.lon,
+                                                            country: city.country)
                                     
-                                    viewModel.activeCity = cityToShow
-                                    navigation.activeSheet = .cityDetailView
+                                    selected(city: selectedCity)
                                 }
                         }
                         .onDelete(perform: deleteCity)
@@ -62,6 +71,7 @@ struct CityListView: View {
                     } header: {
                         
                         if savedCities.isEmpty == false {
+                            
                             Text("Your Saved Cities")
                         }
                     }
@@ -74,16 +84,22 @@ struct CityListView: View {
                     switch sheet {
                         
                     case .cityDetailView:
+                        
                         CityDetailView(city: $viewModel.activeCity)
+                    
                     case .seetings:
-                        SettingsView(currentUnit: $settings.unit)
+                        
+                        SettingsView()
                     }
                 }
                 .toolbar {
 
                     Button(action: {
+                        
                         navigation.activeSheet = .seetings
-                     }) {
+                        
+                    }) {
+                        
                         Image(systemName: "gearshape")
                     }
                 }
@@ -102,16 +118,14 @@ struct CityListView: View {
                 
                 Task {
                     
-                    if value.isEmpty == false,
-                       value.count >= 3 {
-                        
-                        await viewModel.search(searchTerm: value)
-                        
-                    } else {
-                        
-                        viewModel.cities.removeAll()
-                    }
+                    await search(value: value)
                 }
+            }
+            .alert(item: $viewModel.alertItem) { alert in
+                
+                Alert(title: alert.title,
+                      message: alert.message,
+                      dismissButton: alert.dismiss)
             }
         }
     }
@@ -119,6 +133,25 @@ struct CityListView: View {
 
 extension CityListView {
     
+    func selected(city: City) {
+        
+        viewModel.activeCity = city
+        navigation.activeSheet = .cityDetailView
+    }
+    
+    func search(value: String) async {
+        
+        if value.isEmpty == false,
+           value.count >= 3 {
+            
+            await viewModel.search(searchTerm: value)
+            
+        } else {
+            
+            viewModel.cities.removeAll()
+        }
+    }
+
     func deleteCity(at offsets: IndexSet) {
         
         withAnimation {
@@ -128,7 +161,7 @@ extension CityListView {
                 savedCities[$0]
                 
             }.forEach(context.delete)
-            
+             
             CoreDataService.shared.save(context: context)
         }
     }

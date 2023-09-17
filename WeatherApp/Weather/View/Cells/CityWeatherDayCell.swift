@@ -8,6 +8,14 @@
 import Foundation
 import SwiftUI
 
+private enum Constants {
+
+    static let horizontalSpacing: CGFloat = 10
+    static let timeFontSize: CGFloat = 16
+    static let temperatureFontSize: CGFloat = 20
+    static let weatherImageSize: CGFloat = 25
+}
+
 struct CityWeatherDayCell: View {
     
     let weatherDay: WeatherDay
@@ -18,9 +26,13 @@ struct CityWeatherDayCell: View {
             .font(.body)
             .fontWeight(.semibold)
             .scaledToFit()
+        
         ScrollView(.horizontal) {
-            HStack(spacing: 10) {
+            
+            HStack(spacing: Constants.horizontalSpacing) {
+                
                 ForEach(weatherDay.forecast) { forecast in
+                    
                     ForecastItemView(forecast: forecast)
                 }
             }
@@ -37,16 +49,17 @@ struct ForecastItemView: View {
     var body: some View {
         
         VStack() {
+            
             Text("\(forecast.time)h")
-                .font(.system(size: 16,
+                .font(.system(size: Constants.timeFontSize,
                               weight: .medium))
             
             WeatherImage(iconString: forecast.icon)
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 25, height: 25)
+                .frame(width: Constants.weatherImageSize, height: Constants.weatherImageSize)
             
             Text("\(forecast.temperature)\(settings.unit.symbol)")
-                .font(.system(size: 20,
+                .font(.system(size: Constants.temperatureFontSize,
                               weight: .medium))
         }
         .padding()

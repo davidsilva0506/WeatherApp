@@ -10,6 +10,7 @@ import SwiftUI
 struct CityDetailView: View {
     
     @Environment(\.managedObjectContext) var context
+    @Environment(\.dismiss) var dismiss
     
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var navigation: Navigation
@@ -43,13 +44,13 @@ struct CityDetailView: View {
                 
                 if let city,
                 viewModel.cityExists(city: city,
-                                    context: context) == false {
+                                     context: context) == false {
                     
                     Button {
-                        
+                            
                         viewModel.saveCity(city: city,
-                                            context: context)
-                        navigation.activeSheet = nil
+                                           context: context)
+                        dismiss()
                         
                     } label: {
                         

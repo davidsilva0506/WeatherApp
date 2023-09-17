@@ -7,13 +7,18 @@
 
 import Foundation
 
+private enum Constants {
+    
+    static let path = "img/w"
+}
+
 public struct ImageRequest: Request {
 
     let icon: String
     
     var path: String {
         
-        return "img/w/\(icon)"
+        return "\(Constants.path)/\(icon)"
     }
 
     var method: HTTPMethod {

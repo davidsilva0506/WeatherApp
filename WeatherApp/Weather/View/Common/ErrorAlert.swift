@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+private enum Constants {
+    
+}
+
 struct AlertItem: Identifiable {
     
     var id: String {
@@ -20,20 +24,8 @@ struct AlertItem: Identifiable {
 }
 
 struct AlertContext {
-
-    static let invalidURL = AlertItem(title: Text("Invalid"),
-                                      message: Text("Something"),
-                                      dismiss: .default(Text("Ok")))
-
-    static let invalidData = AlertItem(title: Text("Invalid"),
-                                       message: Text("Something"),
-                                       dismiss: .default(Text("Ok")))
     
-    static let requestFailed = AlertItem(title: Text("Invalid"),
-                                         message: Text("Something"),
-                                         dismiss: .default(Text("Ok")))
-    
-    static let parsingFailed = AlertItem(title: Text("Invalid"),
-                                         message: Text("Something"),
+    static let requestFailed = AlertItem(title: Text("Oops"),
+                                         message: Text("Something went wrong."),
                                          dismiss: .default(Text("Ok")))
 }

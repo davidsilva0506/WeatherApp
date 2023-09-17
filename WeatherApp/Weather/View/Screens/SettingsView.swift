@@ -9,10 +9,10 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    @Environment(\.dismiss) var dismiss
+
     @EnvironmentObject var settings: Settings
     @EnvironmentObject var navigation: Navigation
-    
-    @Binding var currentUnit: UnitType
     
     var body: some View {
         
@@ -30,7 +30,7 @@ struct SettingsView: View {
                 }
                 .padding()
                 
-                Picker(selection: $currentUnit, label: Text("Select unit")) {
+                Picker(selection: $settings.unit, label: Text("Select unit")) {
                     
                     ForEach(UnitType.allCases, id: \.self) {
                         
@@ -41,7 +41,7 @@ struct SettingsView: View {
                 .pickerStyle(.segmented)
                 .onChange(of: settings.unit) { _ in
                     
-                    navigation.activeSheet = nil
+                    dismiss()
                 }
                 
                 Spacer()
@@ -54,7 +54,7 @@ struct SettingsView_Previews: PreviewProvider {
     
     static var previews: some View {
        
-        SettingsView(currentUnit: .constant(.celsius))
+        SettingsView()
             .environmentObject(Settings())
     }
 }

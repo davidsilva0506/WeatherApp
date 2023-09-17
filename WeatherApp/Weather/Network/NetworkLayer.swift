@@ -13,7 +13,6 @@ public enum NetworkError: Error {
     case invalidData
     case requestFailed
     case parsingFailed
-    case noInternet
 }
 
 private protocol NetworkLayerProtocol {
