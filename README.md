@@ -1,6 +1,6 @@
 # WeatherApp
 
-WeatherApp is a mobile application that provides users with up-to-date weather information for cities worldwide. Users can search for a city and view a detailed five-day weather forecast, toggle between different temperature units (Fahrenheit, Celsius, or Kelvin), access a 3-hourly weather forecast, and see the city's location on map. Additionally, WeatherApp allows users to save their favorite cities, ensuring that weather information is readily available for their preferred locations.
+WeatherApp is a mobile application that provides users with up-to-date weather information for cities worldwide.
 
 ## Features
 
