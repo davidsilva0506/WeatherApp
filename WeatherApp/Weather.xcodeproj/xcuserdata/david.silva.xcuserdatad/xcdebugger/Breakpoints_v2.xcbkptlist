@@ -3,4 +3,54 @@
    uuid = "4CF2F67A-9788-4CBB-AA5B-2CD100EA6F90"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AEC6ED00-BD87-4467-B952-839D7B28630C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Weather/Network/NetworkLayer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "data(for:includeAppId:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "AEC6ED00-BD87-4467-B952-839D7B28630C - 32193b89e86755fe"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Weather.NetworkLayer.data(for: Weather.Request, includeAppId: Swift.Bool) async throws -&gt; Foundation.Data"
+                  moduleName = "Weather"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/david.silva/WeatherApp/WeatherApp/Weather/Network/NetworkLayer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "188">
+               </Location>
+               <Location
+                  uuid = "AEC6ED00-BD87-4467-B952-839D7B28630C - 32193b89e86755fe"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for Weather.NetworkLayer.data(for: Weather.Request, includeAppId: Swift.Bool) async throws -&gt; Foundation.Data"
+                  moduleName = "Weather"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/david.silva/WeatherApp/WeatherApp/Weather/Network/NetworkLayer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "59"
+                  endingLineNumber = "59"
+                  offsetFromSymbolStart = "480">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

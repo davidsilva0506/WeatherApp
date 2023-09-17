@@ -7,11 +7,11 @@
 
 import Foundation
 
+@MainActor
 final class CityListViewModel: ObservableObject {
     
     private let service = ServiceLayer()
 
-    @Published var activeSheet: Sheet?
     @Published var activeCity: City?
     @Published var alertItem: AlertItem?
     @Published var cities: [City] = []
@@ -19,11 +19,8 @@ final class CityListViewModel: ObservableObject {
     func search(searchTerm: String) async {
 
         if let cities = try? await self.service.fetchCities(searchTerm: searchTerm) {
-            
-            DispatchQueue.main.async {
                 
-                self.cities = cities
-            }
+            self.cities = cities
             
         } else {
         

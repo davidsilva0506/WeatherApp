@@ -10,28 +10,38 @@ import SwiftUI
 struct SettingsView: View {
     
     @EnvironmentObject var settings: Settings
+    @EnvironmentObject var navigation: Navigation
     
-    @Binding var activeSheet: Sheet?
+    @Binding var currentUnit: UnitType
     
     var body: some View {
+        
         ZStack {
+            
             Background()
+            
             VStack {
+                
                 HStack {
+                    
                     Spacer()
-                    CloseButton(activeSheet: $activeSheet)
+                            
+                    CloseButton()
                 }
                 .padding()
                 
-                Picker(selection: $settings.unit, label: Text("Select unit")) {
+                Picker(selection: $currentUnit, label: Text("Select unit")) {
+                    
                     ForEach(UnitType.allCases, id: \.self) {
+                        
                         Text($0.rawValue.capitalized)
                     }
                 }
                 .padding()
                 .pickerStyle(.segmented)
-                .onChange(of: settings.unit) { newValue in
-                    settings.unit = newValue
+                .onChange(of: settings.unit) { _ in
+                    
+                    navigation.activeSheet = nil
                 }
                 
                 Spacer()
@@ -41,8 +51,10 @@ struct SettingsView: View {
 }
 
 struct SettingsView_Previews: PreviewProvider {
+    
     static var previews: some View {
-        SettingsView(activeSheet: .constant(nil))
+       
+        SettingsView(currentUnit: .constant(.celsius))
             .environmentObject(Settings())
     }
 }

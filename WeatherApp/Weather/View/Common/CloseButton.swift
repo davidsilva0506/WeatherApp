@@ -10,13 +10,13 @@ import SwiftUI
 
 struct CloseButton: View {
     
-    @Binding var activeSheet: Sheet?
-    
+    @EnvironmentObject var navigation: Navigation
+
     var body: some View {
         
         Button {
            
-            activeSheet = nil
+            navigation.activeSheet = nil
             
         } label: {
             Image(systemName: "xmark")

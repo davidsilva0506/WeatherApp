@@ -54,7 +54,6 @@ class NetworkLayer: NetworkLayerProtocol {
         do {
 
             let URLRequest = try await self.buildURLRequest(for: request, includeAppId: includeAppId)
-            
             let (data, response) = try await self.session.data(for: URLRequest)
             
             guard let httpResponse = response as? HTTPURLResponse,
@@ -106,6 +105,7 @@ private extension NetworkLayer {
         var currentQueryItems = components.queryItems ?? [URLQueryItem]()
         currentQueryItems.append(URLQueryItem(name: "appid", value: self.networkConfig.apiKey))
         components.queryItems = currentQueryItems
+        
         URLRequest.url = components.url
         URLRequest.httpMethod = request.method.rawValue
 

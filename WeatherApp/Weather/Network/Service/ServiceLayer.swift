@@ -29,7 +29,7 @@ final class ServiceLayer: ServiceProtocol {
 
         self.networkLayer = NetworkLayer(networkConfig: config)
     }
-    
+
     func fetchCities(searchTerm: String) async throws -> [City]? {
         
         let citiesRequest = CitiesRequest(cityName: searchTerm)

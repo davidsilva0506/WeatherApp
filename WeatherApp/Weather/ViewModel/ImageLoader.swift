@@ -10,9 +10,9 @@ import SwiftUI
 @MainActor
 final class ImageLoader: ObservableObject {
     
-    @Published var image: Image? = nil
-    
     private let service = ServiceLayer()
+
+    @Published var image: Image? = nil
     
     func load(from iconString: String) async {
         

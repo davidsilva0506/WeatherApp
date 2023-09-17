@@ -10,11 +10,15 @@ import SwiftUI
 @main
 struct WeatherApp: App {
 
-    var settings = Settings()
+    @StateObject private var settings = Settings()
+    @StateObject private var navigation = Navigation()
 
     var body: some Scene {
         WindowGroup {
-            CityListView().environmentObject(settings)
+            CityListView()
+                .environmentObject(settings)
+                .environmentObject(navigation)
+                .environment(\.managedObjectContext, CoreDataService.shared.container.viewContext)
         }
     }
 }

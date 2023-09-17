@@ -9,18 +9,23 @@ import SwiftUI
 
 struct CityDetailView: View {
     
+    @Environment(\.managedObjectContext) var context
+    
     @EnvironmentObject var settings: Settings
+    @EnvironmentObject var navigation: Navigation
 
     @StateObject var viewModel = CityDetailViewModel()
     
     @Binding var city: City?
-    @Binding var activeSheet: Sheet?
 
     var body: some View {
         
         ZStack {
+            
             Background()
+            
             VStack(spacing: 0) {
+                
                 HStack {
                     
                     Text(city?.name ?? "")
@@ -32,13 +37,37 @@ struct CityDetailView: View {
 
                     Spacer()
                     
-                    CloseButton(activeSheet: $activeSheet)
+                    CloseButton()
                 }
                 .padding()
+                
+                if let city,
+                viewModel.cityExists(city: city,
+                                    context: context) == false {
+                    
+                    Button {
+                        
+                        viewModel.saveCity(city: city,
+                                            context: context)
+                        navigation.activeSheet = nil
+                        
+                    } label: {
+                        
+                        Text("Save City Info")
+                            .frame(width: 280, height: 50)
+                            .font(.system(size: 22, weight: .bold))
+                            .cornerRadius(10)
+                    }
+                    .tint(.white)
+                    .buttonStyle(.bordered)
+                }
+                
+                Spacer()
                 
                 MapView(city: city)
 
                 List(viewModel.weatherDays) { day in
+                    
                     CityWeatherDayCell(weatherDay: day)
                 }
             }
@@ -63,6 +92,6 @@ struct CityDetailView: View {
 
 struct CityDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        CityDetailView(city: .constant(nil), activeSheet: .constant(nil))
+        CityDetailView(city: .constant(nil))
     }
 }

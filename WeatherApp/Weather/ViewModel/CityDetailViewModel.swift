@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreData
 
 private enum Constants {
 
@@ -16,11 +17,11 @@ private enum Constants {
 @MainActor
 final class CityDetailViewModel: ObservableObject {
     
+    private let service = ServiceLayer()
+
     @Published var isLoading = false
     @Published var weatherDays = [WeatherDay]()
     @Published var alertItem: AlertItem?
-    
-    private let service = ServiceLayer()
 
     func getWeather(for city: City?, unit: String) async {
         
@@ -47,8 +48,30 @@ final class CityDetailViewModel: ObservableObject {
         }
 
         self.isLoading = false
-        
         self.weatherDays = weatherDays
+    }
+    
+    func saveCity(city: City, context: NSManagedObjectContext) {
+        
+        CoreDataService.shared.addCityDetail(city: city, context: context)
+    }
+    
+    func cityExists(city: City, context: NSManagedObjectContext) -> Bool {
+        
+        var numberOfRecords = 0
+
+        do {
+            
+            let fetch = NSFetchRequest<NSFetchRequestResult>(entityName: "CityDetail")
+            fetch.predicate = NSPredicate(format: "name == %@", city.name)
+            numberOfRecords = try context.count(for: fetch)
+            
+        } catch {
+            
+            print("error getting saved cities")
+        }
+        
+        return numberOfRecords > 0
     }
 }
 
@@ -61,17 +84,15 @@ extension CityDetailViewModel {
         return forecast.list.compactMap { cityWeather in
 
             guard let icon = cityWeather.weather.first?.icon,
-                  let date = Constants.dateFormatter.date(from: cityWeather.dt_txt) else {
+                  let date = Constants.dateFormatter.date(from: cityWeather.dateString) else {
                 
                 return nil
             }
             
             let time = Calendar.current.component(.hour, from: date)
-            
             let dayForecast = DayForecast(time: String(time),
                                           temperature: Int(cityWeather.main.temp),
                                           icon: icon)
-
             let weatherForecast = WeatherForecast(date: date.formatted(.iso8601.year().month().day().dateSeparator(.dash)),
                                                   forecast: dayForecast)
             
@@ -88,7 +109,8 @@ extension CityDetailViewModel {
         
         return forecastByDay.map { (day, forecast) in
             
-            return WeatherDay(day: day, forecast: forecast)
+            WeatherDay(day: day, forecast: forecast)
+
         }.sorted(by: { $0.day < $1.day })
     }
 }

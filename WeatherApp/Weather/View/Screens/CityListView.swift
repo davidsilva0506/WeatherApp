@@ -9,48 +9,88 @@ import SwiftUI
 
 struct CityListView: View {
     
-    @StateObject private var viewModel = CityListViewModel()
+    @Environment(\.managedObjectContext) var context
+    @EnvironmentObject var settings: Settings
+    @EnvironmentObject var navigation: Navigation
+
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var savedCities: FetchedResults<CityDetail>
     
+    @StateObject private var viewModel = CityListViewModel()
     @State private var searchTerm = ""
 
     var body: some View {
         ZStack {
             NavigationStack {
-                List(viewModel.cities, id: \.name) { city in
-                    Button {
-                        viewModel.activeCity = city
-                        viewModel.activeSheet = .cityDetailView
-                    } label: {
-                        Text("\(city.name), \(city.country)")
-                            .font(.body)
-                            .fontWeight(.semibold)
-                            .scaledToFit()
+                List {
+                    Section() {
+                        ForEach(viewModel.cities, id: \.name) { city in
+                            Button {
+                                viewModel.activeCity = city
+                                navigation.activeSheet = .cityDetailView
+                            } label: {
+                                Text("\(city.name), \(city.country)")
+                                    .font(.body)
+                                    .fontWeight(.semibold)
+                                    .scaledToFit()
+                            }
+                            .buttonStyle(.bordered)
+                            .controlSize(.large)
+                            .listRowSeparator(.hidden)
+                        }
                     }
+                    
+                    Section {
+                        
+                        ForEach(savedCities, id: \.name) { city in
+                            Text("\(city.name), \(city.country)")
+                                .font(.body)
+                                .fontWeight(.semibold)
+                                .scaledToFit()
+                                .onTapGesture {
+                                    
+                                    let cityToShow = City(name: city.name,
+                                                          lat: city.lat,
+                                                          lon: city.lon,
+                                                          country: city.country)
+                                    
+                                    viewModel.activeCity = cityToShow
+                                    navigation.activeSheet = .cityDetailView
+                                }
+                        }
+                        .onDelete(perform: deleteCity)
+
+                    } header: {
+                        
+                        if savedCities.isEmpty == false {
+                            Text("Your Saved Cities")
+                        }
+                    }
+                    .headerProminence(.increased)
                 }
-                .listStyle(.plain)
+                .listStyle(.insetGrouped)
                 .navigationTitle("Cities")
-                .sheet(item: $viewModel.activeSheet) { sheet in
+                .sheet(item: $navigation.activeSheet) { sheet in
                     
                     switch sheet {
                         
                     case .cityDetailView:
-                        CityDetailView(city: $viewModel.activeCity,
-                                       activeSheet: $viewModel.activeSheet)
+                        CityDetailView(city: $viewModel.activeCity)
                     case .seetings:
-                        SettingsView(activeSheet: $viewModel.activeSheet)
+                        SettingsView(currentUnit: $settings.unit)
                     }
                 }
                 .toolbar {
 
                     Button(action: {
-                        viewModel.activeSheet = .seetings
+                        navigation.activeSheet = .seetings
                      }) {
                         Image(systemName: "gearshape")
                     }
                 }
                 .overlay {
 
-                    if viewModel.cities.isEmpty {
+                    if viewModel.cities.isEmpty &&
+                        savedCities.isEmpty {
 
                         EmptyCityListView()
                     }
@@ -73,6 +113,23 @@ struct CityListView: View {
                     }
                 }
             }
+        }
+    }
+}
+
+extension CityListView {
+    
+    func deleteCity(at offsets: IndexSet) {
+        
+        withAnimation {
+            
+            offsets.map {
+                  
+                savedCities[$0]
+                
+            }.forEach(context.delete)
+            
+            CoreDataService.shared.save(context: context)
         }
     }
 }

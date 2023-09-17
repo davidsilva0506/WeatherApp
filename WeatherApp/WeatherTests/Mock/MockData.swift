@@ -19,16 +19,16 @@ struct MockData {
     static let weatherInfoC = WeatherInfo(id: 3, icon: "01d")
     
     static let cityWeatherA = CityWeather(main: mainWeatherInfoA,
-                                         weather: [weatherInfoA],
-                                         dt_txt: "2023-09-14 15:00:00")
+                                          weather: [weatherInfoA],
+                                          dateString: "2023-09-14 15:00:00")
     
     static let cityWeatherB = CityWeather(main: mainWeatherInfoB,
-                                         weather: [weatherInfoB],
-                                         dt_txt: "2023-09-15 15:00:00")
+                                          weather: [weatherInfoB],
+                                          dateString: "2023-09-15 15:00:00")
     
     static let cityWeatherC = CityWeather(main: mainWeatherInfoB,
-                                         weather: [weatherInfoB],
-                                         dt_txt: "2023-09-15 15:00:00")
+                                          weather: [weatherInfoB],
+                                          dateString: "2023-09-15 15:00:00")
     
-    static let forecast = Forecast(cnt: 3, list: [cityWeatherA, cityWeatherB, cityWeatherC])
+    static let forecast = Forecast(list: [cityWeatherA, cityWeatherB, cityWeatherC])
 }

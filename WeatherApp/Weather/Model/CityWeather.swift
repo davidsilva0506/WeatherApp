@@ -11,5 +11,12 @@ struct CityWeather: Decodable {
     
     let main: MainWeatherInfo
     let weather: [WeatherInfo]
-    let dt_txt: String
+    let dateString: String
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case main
+        case weather
+        case dateString = "dt_txt"
+    }
 }
