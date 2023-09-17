@@ -49,6 +49,7 @@
 		3054CE172AB4A7D800A352E8 /* CityDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054CE162AB4A7D800A352E8 /* CityDetail.swift */; };
 		3054CE222AB4B7C400A352E8 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054CE212AB4B7C400A352E8 /* CoreDataService.swift */; };
 		3054CE262AB620D900A352E8 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054CE252AB620D900A352E8 /* Navigation.swift */; };
+		3054CE282AB7AC1800A352E8 /* PinnedCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054CE272AB7AC1800A352E8 /* PinnedCity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		3054CE162AB4A7D800A352E8 /* CityDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetail.swift; sourceTree = "<group>"; };
 		3054CE212AB4B7C400A352E8 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		3054CE252AB620D900A352E8 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
+		3054CE272AB7AC1800A352E8 /* PinnedCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedCity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 		3054CDAD2AB0B3AC00A352E8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3054CDCF2AB1FA0A00A352E8 /* Sheet.swift */,
 				3054CDB22AB10A3800A352E8 /* City.swift */,
 				3054CDCB2AB1D79C00A352E8 /* Forecast.swift */,
 				3054CDC92AB1D48000A352E8 /* CityWeather.swift */,
@@ -172,6 +175,7 @@
 				3054CDEF2AB3264600A352E8 /* WeatherForecast.swift */,
 				3054CDFB2AB36AF800A352E8 /* Unit.swift */,
 				3054CE162AB4A7D800A352E8 /* CityDetail.swift */,
+				3054CE272AB7AC1800A352E8 /* PinnedCity.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -231,7 +235,6 @@
 		3054CDDB2AB2430900A352E8 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				3054CDCF2AB1FA0A00A352E8 /* Sheet.swift */,
 				3054CDD12AB1FA5C00A352E8 /* ErrorAlert.swift */,
 				3054CDD32AB1FDEB00A352E8 /* Loading.swift */,
 				3054CDDC2AB2433000A352E8 /* RemoteImage.swift */,
@@ -412,6 +415,7 @@
 				3054CDD02AB1FA0A00A352E8 /* Sheet.swift in Sources */,
 				3054CDF42AB358F800A352E8 /* Map.swift in Sources */,
 				3054CDE12AB2454100A352E8 /* CloseButton.swift in Sources */,
+				3054CE282AB7AC1800A352E8 /* PinnedCity.swift in Sources */,
 				3054CE262AB620D900A352E8 /* Navigation.swift in Sources */,
 				3054CDD22AB1FA5C00A352E8 /* ErrorAlert.swift in Sources */,
 				3054CDAA2AB0AA8400A352E8 /* CityListView.swift in Sources */,

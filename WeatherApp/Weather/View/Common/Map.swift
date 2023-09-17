@@ -12,20 +12,8 @@ import MapKit
 private enum Constants {
     
     static let delta = 0.1
-    
     static let mapWidth = UIScreen.main.bounds.size.width
     static let mapHeight: CGFloat = 150
-}
-
-struct PinnedCity: Identifiable {
-
-    var id: String {
-    
-        return UUID().uuidString
-    }
-
-    let name: String
-    let coordinates: CLLocationCoordinate2D
 }
 
 struct MapView: View {

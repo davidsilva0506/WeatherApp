@@ -9,6 +9,9 @@ import SwiftUI
 
 private enum Constants {
     
+    static let errorTitle = "Oops"
+    static let errorMessage = "Something went wrong."
+    static let dismissText = "Ok"
 }
 
 struct AlertItem: Identifiable {
@@ -25,7 +28,7 @@ struct AlertItem: Identifiable {
 
 struct AlertContext {
     
-    static let requestFailed = AlertItem(title: Text("Oops"),
-                                         message: Text("Something went wrong."),
-                                         dismiss: .default(Text("Ok")))
+    static let requestFailed = AlertItem(title: Text(Constants.errorTitle),
+                                         message: Text(Constants.errorMessage),
+                                         dismiss: .default(Text(Constants.dismissText)))
 }

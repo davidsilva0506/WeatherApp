@@ -8,6 +8,12 @@
 import Foundation
 import SwiftUI
 
+private enum Constants {
+
+    static let imageName = "xmark"
+    static let imageSize: CGFloat = 44
+}
+
 struct CloseButton: View {
     
     @Environment(\.dismiss) var dismiss
@@ -20,10 +26,10 @@ struct CloseButton: View {
             
         } label: {
             
-            Image(systemName: "xmark")
+            Image(systemName: Constants.imageName)
                 .foregroundColor(.white)
                 .imageScale(.large)
-                .frame(width: 44, height: 44)
+                .frame(width: Constants.imageSize, height: Constants.imageSize)
         }
     }
 }
