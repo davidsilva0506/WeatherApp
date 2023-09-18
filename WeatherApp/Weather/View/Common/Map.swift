@@ -30,6 +30,7 @@ struct MapView: View {
                                       coordinates: coordinates)]
 
         Map(coordinateRegion: .constant(MKCoordinateRegion(center: coordinates, span: span)),
+            interactionModes: [],
             annotationItems: annotations) {
             
             MapMarker(coordinate: $0.coordinates)

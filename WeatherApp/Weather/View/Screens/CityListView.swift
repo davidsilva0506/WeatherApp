@@ -29,11 +29,13 @@ struct CityListView: View {
     @State private var searchTerm = ""
     
     private let service: ServiceLayer
+    private let coreDataService: CoreDataService
     
-    init(service: ServiceLayer) {
+    init(service: ServiceLayer, coreDataService: CoreDataService) {
         
         _viewModel = StateObject(wrappedValue: CityListViewModel(service: service))
         self.service = service
+        self.coreDataService = coreDataService
     }
 
     var body: some View {
@@ -47,6 +49,7 @@ struct CityListView: View {
                     ForEach(viewModel.cities, id: \.name) { city in
                         
                         NavigationLink(destination: CityDetailView(service: self.service,
+                                                                   coreDataService: self.coreDataService,
                                                                    city: city)) {
                                 
                             Text("\(city.name), \(city.country)")
@@ -66,7 +69,9 @@ struct CityListView: View {
                                               lon: city.lon,
                                               country: city.country)
                         
-                        NavigationLink(destination: CityDetailView(service: self.service, city: cityDetail)) {
+                        NavigationLink(destination: CityDetailView(service: self.service,
+                                                                   coreDataService: self.coreDataService,
+                                                                   city: cityDetail)) {
                          
                             Text("\(cityDetail.name), \(cityDetail.country)")
                                 .font(.body)
@@ -156,7 +161,7 @@ extension CityListView {
              
             Task {
              
-                await CoreDataService.shared.save(context: context)
+                await self.coreDataService.save(context: context)
             }
         }
     }
@@ -164,6 +169,6 @@ extension CityListView {
 
 struct CityListView_Previews: PreviewProvider {
     static var previews: some View {
-        CityListView(service: ServiceLayer())
+        CityListView(service: ServiceLayer(), coreDataService: CoreDataService())
     }
 }

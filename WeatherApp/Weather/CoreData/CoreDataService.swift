@@ -16,8 +16,6 @@ private enum Constants {
 }
 
 final class CoreDataService: ObservableObject {
-    
-    static let shared = CoreDataService()
 
     let container = NSPersistentContainer(name: Constants.containerName)
     

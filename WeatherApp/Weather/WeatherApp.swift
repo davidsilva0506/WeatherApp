@@ -11,6 +11,7 @@ import SwiftUI
 struct WeatherApp: App {
 
     @StateObject private var service = ServiceLayer()
+    @StateObject private var coreDataService = CoreDataService()
     @StateObject private var settings = Settings()
     @StateObject private var navigation = Navigation()
 
@@ -18,10 +19,10 @@ struct WeatherApp: App {
         
         WindowGroup {
             
-            CityListView(service: service)
-                .environmentObject(settings)
-                .environmentObject(navigation)
-                .environment(\.managedObjectContext, CoreDataService.shared.container.viewContext)
+            CityListView(service: self.service, coreDataService: self.coreDataService)
+                .environmentObject(self.settings)
+                .environmentObject(self.navigation)
+                .environment(\.managedObjectContext, self.coreDataService.container.viewContext)
         }
     }
 }

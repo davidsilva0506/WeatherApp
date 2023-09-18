@@ -21,15 +21,17 @@ private enum Constants {
 final class CityDetailViewModel: ObservableObject {
     
     private let service: ServiceLayer
+    private let coreDataService: CoreDataService
 
     @Published var isLoading = false
     @Published var cityIsSaved = false
     @Published var weatherDays = [WeatherDay]()
     @Published var alertItem: AlertItem?
 
-    init(service: ServiceLayer) {
+    init(service: ServiceLayer, coreDataService: CoreDataService) {
         
         self.service = service
+        self.coreDataService = coreDataService
     }
 
     func getWeather(for city: City?, unit: String) async {
@@ -60,7 +62,7 @@ final class CityDetailViewModel: ObservableObject {
     
     func saveCity(city: City, context: NSManagedObjectContext) async {
         
-        await CoreDataService.shared.addCityDetail(city: city, context: context)
+        await self.coreDataService.addCityDetail(city: city, context: context)
         self.cityIsSaved = true
     }
     
