@@ -12,7 +12,7 @@ private enum Constants {
     static let requestLimit = "1"
     static let path = "geo/1.0/direct"
     static let cityParamKey = "q"
-    static let limitParamKey = "q"
+    static let limitParamKey = "limit"
 }
 
 public struct CitiesRequest: Request {
