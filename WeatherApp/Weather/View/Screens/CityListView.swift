@@ -23,9 +23,18 @@ struct CityListView: View {
     @EnvironmentObject private var navigation: Navigation
 
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) private var savedCities: FetchedResults<CityDetail>
-    
-    @StateObject private var viewModel = CityListViewModel()
+
+    @StateObject private var viewModel: CityListViewModel
+
     @State private var searchTerm = ""
+    
+    private let service: ServiceLayer
+    
+    init(service: ServiceLayer) {
+        
+        _viewModel = StateObject(wrappedValue: CityListViewModel(service: service))
+        self.service = service
+    }
 
     var body: some View {
             
@@ -37,7 +46,8 @@ struct CityListView: View {
                     
                     ForEach(viewModel.cities, id: \.name) { city in
                         
-                        NavigationLink(destination: CityDetailView(city: city)) {
+                        NavigationLink(destination: CityDetailView(service: self.service,
+                                                                   city: city)) {
                                 
                             Text("\(city.name), \(city.country)")
                                 .font(.body)
@@ -56,7 +66,7 @@ struct CityListView: View {
                                               lon: city.lon,
                                               country: city.country)
                         
-                        NavigationLink(destination: CityDetailView(city: cityDetail)) {
+                        NavigationLink(destination: CityDetailView(service: self.service, city: cityDetail)) {
                          
                             Text("\(cityDetail.name), \(cityDetail.country)")
                                 .font(.body)
@@ -154,6 +164,6 @@ extension CityListView {
 
 struct CityListView_Previews: PreviewProvider {
     static var previews: some View {
-        CityListView()
+        CityListView(service: ServiceLayer())
     }
 }

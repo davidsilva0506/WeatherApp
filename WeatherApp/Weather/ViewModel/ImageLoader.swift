@@ -10,10 +10,15 @@ import SwiftUI
 @MainActor
 final class ImageLoader: ObservableObject {
     
-    private let service = ServiceLayer()
+    private let service: ServiceLayer
     private let imageCache = NSCache<NSString, UIImage>()
 
     @Published var image: Image? = nil
+    
+    init(service: ServiceLayer) {
+        
+        self.service = service
+    }
     
     func load(from iconString: String) async {
 

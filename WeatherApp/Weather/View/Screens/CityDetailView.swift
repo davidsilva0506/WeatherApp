@@ -24,9 +24,17 @@ struct CityDetailView: View {
     
     @EnvironmentObject private var settings: Settings
 
-    @StateObject private var viewModel = CityDetailViewModel()
+    @StateObject private var viewModel: CityDetailViewModel
     
+    let service: ServiceLayer
     let city: City
+    
+    init(service: ServiceLayer, city: City) {
+        
+        _viewModel = StateObject(wrappedValue: CityDetailViewModel(service: service))
+        self.service = service
+        self.city = city
+    }
 
     var body: some View {
             
@@ -58,7 +66,7 @@ struct CityDetailView: View {
 
                 List(viewModel.weatherDays) { day in
 
-                    CityWeatherDayCell(weatherDay: day)
+                    CityWeatherDayCell(service: self.service, weatherDay: day)
                 }
                 .navigationTitle(city.name)
             }
@@ -84,9 +92,6 @@ struct CityDetailView: View {
 
 struct CityDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        CityDetailView(city: City(name: "",
-                                  lat: 0,
-                                  lon: 0,
-                                  country: ""))
+        CityDetailView(service: ServiceLayer(), city: City(name: "", lat: 0, lon: 0, country: ""))
     }
 }

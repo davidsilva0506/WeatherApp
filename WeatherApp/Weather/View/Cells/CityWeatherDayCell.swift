@@ -18,6 +18,7 @@ private enum Constants {
 
 struct CityWeatherDayCell: View {
     
+    let service: ServiceLayer
     let weatherDay: WeatherDay
     
     var body: some View {
@@ -33,7 +34,7 @@ struct CityWeatherDayCell: View {
                 
                 ForEach(weatherDay.forecast) { forecast in
                     
-                    ForecastItemView(forecast: forecast)
+                    ForecastItemView(service: self.service, forecast: forecast)
                 }
             }
         }
@@ -44,6 +45,7 @@ struct ForecastItemView: View {
     
     @EnvironmentObject var settings: Settings
 
+    let service: ServiceLayer
     let forecast: DayForecast
     
     var body: some View {
@@ -54,7 +56,7 @@ struct ForecastItemView: View {
                 .font(.system(size: Constants.timeFontSize,
                               weight: .medium))
             
-            WeatherImage(iconString: forecast.icon)
+            WeatherImage(service: self.service, iconString: forecast.icon)
                 .aspectRatio(contentMode: .fit)
                 .frame(width: Constants.weatherImageSize, height: Constants.weatherImageSize)
             

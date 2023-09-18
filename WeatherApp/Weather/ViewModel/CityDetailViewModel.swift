@@ -20,12 +20,17 @@ private enum Constants {
 @MainActor
 final class CityDetailViewModel: ObservableObject {
     
-    private let service = ServiceLayer()
+    private let service: ServiceLayer
 
     @Published var isLoading = false
     @Published var cityIsSaved = false
     @Published var weatherDays = [WeatherDay]()
     @Published var alertItem: AlertItem?
+
+    init(service: ServiceLayer) {
+        
+        self.service = service
+    }
 
     func getWeather(for city: City?, unit: String) async {
         

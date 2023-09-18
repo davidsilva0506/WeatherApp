@@ -43,17 +43,4 @@ public enum UnitType: String, CaseIterable, Identifiable {
             return "K"
         }
     }
-    
-    public var index: Int {
-
-        switch self {
-            
-        case .fahrenheit:
-            return 0
-        case .celsius:
-            return 1
-        case .kelvin:
-            return 2
-        }
-    }
 }

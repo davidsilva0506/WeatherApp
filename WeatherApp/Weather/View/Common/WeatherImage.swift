@@ -10,9 +10,15 @@ import SwiftUI
 
 struct WeatherImage: View {
     
-    @StateObject private var imageLoader = ImageLoader()
+    @StateObject private var imageLoader: ImageLoader
     
     let iconString: String
+    
+    init(service: ServiceLayer, iconString: String) {
+        
+        _imageLoader = StateObject(wrappedValue: ImageLoader(service: service))
+        self.iconString = iconString
+    }
     
     var body: some View {
         

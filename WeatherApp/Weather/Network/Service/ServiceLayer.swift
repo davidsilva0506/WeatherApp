@@ -15,7 +15,7 @@ private enum Constants {
     static let apiKey = "e162ec3d70d085243b4d63c68a5ca070"
 }
 
-final class ServiceLayer: ServiceProtocol {
+final class ServiceLayer: ServiceProtocol, ObservableObject {
     
     internal let networkLayer: NetworkLayer
     

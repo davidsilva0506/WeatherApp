@@ -10,10 +10,15 @@ import Foundation
 @MainActor
 final class CityListViewModel: ObservableObject {
     
-    private let service = ServiceLayer()
+    private let service: ServiceLayer
 
     @Published var alertItem: AlertItem?
     @Published var cities: [City] = []
+    
+    init(service: ServiceLayer) {
+        
+        self.service = service
+    }
 
     func search(searchTerm: String) async {
 
