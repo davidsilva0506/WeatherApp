@@ -16,7 +16,8 @@ struct WeatherImage: View {
     
     init(service: ServiceLayer, iconString: String) {
         
-        _imageLoader = StateObject(wrappedValue: ImageLoader(service: service))
+        self._imageLoader = StateObject(wrappedValue: ImageLoader(service: service))
+
         self.iconString = iconString
     }
     

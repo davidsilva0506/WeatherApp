@@ -33,7 +33,8 @@ struct CityDetailView: View {
          coreDataService: CoreDataService,
          city: City) {
         
-        _viewModel = StateObject(wrappedValue: CityDetailViewModel(service: service, coreDataService: coreDataService))
+        self._viewModel = StateObject(wrappedValue: CityDetailViewModel(service: service, coreDataService: coreDataService))
+
         self.service = service
         self.city = city
     }
@@ -93,7 +94,9 @@ struct CityDetailView: View {
 }
 
 struct CityDetailView_Previews: PreviewProvider {
+    
     static var previews: some View {
+        
         CityDetailView(service: ServiceLayer(),
                        coreDataService: CoreDataService(),
                        city: City(name: "", lat: 0, lon: 0, country: ""))

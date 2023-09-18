@@ -32,7 +32,8 @@ struct CityListView: View {
     
     init(service: ServiceLayer, coreDataService: CoreDataService) {
         
-        _viewModel = StateObject(wrappedValue: CityListViewModel(service: service))
+        self._viewModel = StateObject(wrappedValue: CityListViewModel(service: service))
+
         self.service = service
         self.coreDataService = coreDataService
     }
@@ -142,7 +143,9 @@ extension CityListView {
 }
 
 struct CityListView_Previews: PreviewProvider {
+    
     static var previews: some View {
+        
         CityListView(service: ServiceLayer(), coreDataService: CoreDataService())
     }
 }
