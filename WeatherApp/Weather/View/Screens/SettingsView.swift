@@ -12,6 +12,7 @@ struct SettingsView: View {
     private enum Constants {
         
         static let pickerLabelText = "Select unit"
+        static let title = "Settings"
     }
 
     @Environment(\.dismiss) private var dismiss
@@ -36,7 +37,7 @@ struct SettingsView: View {
                 
                 Spacer()
             }
-            .navigationTitle("Settings")
+            .navigationTitle(Constants.title)
             .toolbar {
                 
                 CloseButton()
