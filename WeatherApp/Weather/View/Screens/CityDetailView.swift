@@ -21,36 +21,38 @@ struct CityDetailView: View {
     var body: some View {
             
         NavigationStack {
+            
+            VStack(spacing: 0) {
                 
-            Button {
-                
-                Task {
+                Button {
                     
-                    await viewModel.saveCity(city: city,
-                                             context: context)
+                    Task {
+                        
+                        await viewModel.saveCity(city: city,
+                                                 context: context)
+                    }
+                    
+                } label: {
+                    
+                    Text(viewModel.cityIsSaved ? "Saved" : "Save city")
+                        .frame(width: 220, height: 40)
+                        .font(.system(size: 22, weight: .bold))
+                        .cornerRadius(10)
                 }
+                .buttonStyle(.bordered)
+                .disabled(viewModel.cityIsSaved)
                 
-            } label: {
+                Spacer()
                 
-                Text(viewModel.cityIsSaved ? "Saved" : "Save city")
-                    .frame(width: 220, height: 40)
-                    .font(.system(size: 22, weight: .bold))
-                    .cornerRadius(10)
-            }
-            .buttonStyle(.bordered)
-            .disabled(viewModel.cityIsSaved)
-            
-            Spacer()
-            
-            MapView(city: city)
+                MapView(city: city)
 
-            List(viewModel.weatherDays) { day in
-                
-                CityWeatherDayCell(weatherDay: day)
+                List(viewModel.weatherDays) { day in
+
+                    CityWeatherDayCell(weatherDay: day)
+                }
+                .navigationTitle(city.name)
             }
-            .navigationTitle(city.name)
         }
-        
         .task {
             
             viewModel.cityExists(city: city, context: context)
