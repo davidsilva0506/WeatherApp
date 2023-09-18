@@ -34,7 +34,7 @@ final class CoreDataService: ObservableObject {
         }
     }
     
-    func save(context: NSManagedObjectContext) {
+    func save(context: NSManagedObjectContext) async {
         
         do {
             
@@ -46,7 +46,7 @@ final class CoreDataService: ObservableObject {
         }
     }
     
-    func addCityDetail(city: City, context: NSManagedObjectContext) {
+    func addCityDetail(city: City, context: NSManagedObjectContext) async {
         
         let newCityDetail = CityDetail(context: context)
         
@@ -55,6 +55,6 @@ final class CoreDataService: ObservableObject {
         newCityDetail.lon = city.lon
         newCityDetail.country = city.country
         
-        self.save(context: context)
+        await self.save(context: context)
     }
 }

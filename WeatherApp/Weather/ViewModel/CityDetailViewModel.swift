@@ -23,6 +23,7 @@ final class CityDetailViewModel: ObservableObject {
     private let service = ServiceLayer()
 
     @Published var isLoading = false
+    @Published var cityIsSaved = false
     @Published var weatherDays = [WeatherDay]()
     @Published var alertItem: AlertItem?
 
@@ -54,12 +55,13 @@ final class CityDetailViewModel: ObservableObject {
         self.weatherDays = weatherDays
     }
     
-    func saveCity(city: City, context: NSManagedObjectContext) {
+    func saveCity(city: City, context: NSManagedObjectContext) async {
         
-        CoreDataService.shared.addCityDetail(city: city, context: context)
+        await CoreDataService.shared.addCityDetail(city: city, context: context)
+        self.cityIsSaved = true
     }
     
-    func cityExists(city: City, context: NSManagedObjectContext) -> Bool {
+    func cityExists(city: City, context: NSManagedObjectContext) {
         
         var numberOfRecords = 0
 
@@ -74,7 +76,7 @@ final class CityDetailViewModel: ObservableObject {
             assertionFailure(Constants.assertionMessage)
         }
         
-        return numberOfRecords > 0
+        self.cityIsSaved = numberOfRecords > 0
     }
 }
 

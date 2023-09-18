@@ -20,96 +20,93 @@ struct CityListView: View {
     @State private var searchTerm = ""
 
     var body: some View {
-        
-        ZStack {
             
-            NavigationStack {
+        NavigationStack {
+            
+            List {
                 
-                List {
+                Section() {
                     
-                    Section() {
+                    ForEach(viewModel.cities, id: \.name) { city in
                         
-                        ForEach(viewModel.cities, id: \.name) { city in
-                            
-                            NavigationLink(destination: CityDetailView(city: city)) {
-                                    
-                                Text("\(city.name), \(city.country)")
-                                    .font(.body)
-                                    .fontWeight(.semibold)
-                                    .scaledToFit()
-                            }
+                        NavigationLink(destination: CityDetailView(city: city)) {
+                                
+                            Text("\(city.name), \(city.country)")
+                                .font(.body)
+                                .fontWeight(.semibold)
+                                .scaledToFit()
                         }
                     }
+                }
+                
+                Section {
                     
-                    Section {
+                    ForEach(savedCities, id: \.name) { city in
                         
-                        ForEach(savedCities, id: \.name) { city in
-                            
-                            let cityDetail = City(name: city.name,
-                                                  lat: city.lat,
-                                                  lon: city.lon,
-                                                  country: city.country)
-                            
-                            NavigationLink(destination: CityDetailView(city: cityDetail)) {
-                             
-                                Text("\(cityDetail.name), \(cityDetail.country)")
-                                    .font(.body)
-                                    .fontWeight(.semibold)
-                                    .scaledToFit()
-                            }
-                        }
-                        .onDelete(perform: deleteCity)
-
-                    } header: {
+                        let cityDetail = City(name: city.name,
+                                              lat: city.lat,
+                                              lon: city.lon,
+                                              country: city.country)
                         
-                        if savedCities.isEmpty == false {
-                            
-                            Text("Your Saved Cities")
+                        NavigationLink(destination: CityDetailView(city: cityDetail)) {
+                         
+                            Text("\(cityDetail.name), \(cityDetail.country)")
+                                .font(.body)
+                                .fontWeight(.semibold)
+                                .scaledToFit()
                         }
                     }
-                    .headerProminence(.increased)
-                }
-                .navigationTitle("Cities")
-                .listStyle(.insetGrouped)
-                .sheet(isPresented: $navigation.isShowingSettingsView) {
-                        
-                    SettingsView()
-                }
-                .toolbar {
+                    .onDelete(perform: deleteCity)
 
-                    Button(action: {
-                        
-                        navigation.isShowingSettingsView = true
-                        
-                    }) {
-                        
-                        Image(systemName: "gearshape")
-                    }
-                }
-                .overlay {
-
-                    if viewModel.cities.isEmpty &&
-                        savedCities.isEmpty {
-
-                        EmptyCityListView()
-                    }
-                }
-            }
-            .searchable(text: $searchTerm, placement: .navigationBarDrawer(displayMode: .always))
-            .autocorrectionDisabled(true)
-            .onChange(of: searchTerm) { value in
-                
-                Task {
+                } header: {
                     
-                    await search(value: value)
+                    if savedCities.isEmpty == false {
+                        
+                        Text("Your Saved Cities")
+                    }
+                }
+                .headerProminence(.increased)
+            }
+            .navigationTitle("Cities")
+            .listStyle(.insetGrouped)
+            .sheet(isPresented: $navigation.isShowingSettingsView) {
+                    
+                SettingsView()
+            }
+            .toolbar {
+
+                Button(action: {
+                    
+                    navigation.isShowingSettingsView = true
+                    
+                }) {
+                    
+                    Image(systemName: "gearshape")
                 }
             }
-            .alert(item: $viewModel.alertItem) { alert in
-                
-                Alert(title: alert.title,
-                      message: alert.message,
-                      dismissButton: alert.dismiss)
+            .overlay {
+
+                if viewModel.cities.isEmpty &&
+                    savedCities.isEmpty {
+
+                    EmptyCityListView()
+                }
             }
+        }
+        .searchable(text: $searchTerm, placement: .navigationBarDrawer(displayMode: .always))
+        .autocorrectionDisabled(true)
+        .onChange(of: searchTerm) { value in
+            
+            Task {
+                
+                await search(value: value)
+            }
+        }
+        .alert(item: $viewModel.alertItem) { alert in
+            
+            Alert(title: alert.title,
+                  message: alert.message,
+                  dismissButton: alert.dismiss)
         }
     }
 }
@@ -139,7 +136,10 @@ extension CityListView {
                 
             }.forEach(context.delete)
              
-            CoreDataService.shared.save(context: context)
+            Task {
+             
+                await CoreDataService.shared.save(context: context)
+            }
         }
     }
 }

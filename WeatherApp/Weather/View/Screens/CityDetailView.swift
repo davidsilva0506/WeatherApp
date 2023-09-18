@@ -21,25 +21,24 @@ struct CityDetailView: View {
     var body: some View {
             
         NavigationStack {
-
-            if viewModel.cityExists(city: city,
-                                    context: context) == false {
                 
-                Button {
-                        
-                    viewModel.saveCity(city: city,
-                                       context: context)
+            Button {
+                
+                Task {
                     
-                } label: {
-                    
-                    Text("Save City Info")
-                        .frame(width: 280, height: 50)
-                        .font(.system(size: 22, weight: .bold))
-                        .cornerRadius(10)
+                    await viewModel.saveCity(city: city,
+                                             context: context)
                 }
-                .tint(.white)
-                .buttonStyle(.bordered)
+                
+            } label: {
+                
+                Text(viewModel.cityIsSaved ? "Saved" : "Save city")
+                    .frame(width: 220, height: 40)
+                    .font(.system(size: 22, weight: .bold))
+                    .cornerRadius(10)
             }
+            .buttonStyle(.bordered)
+            .disabled(viewModel.cityIsSaved)
             
             Spacer()
             
@@ -54,6 +53,7 @@ struct CityDetailView: View {
         
         .task {
             
+            viewModel.cityExists(city: city, context: context)
             await viewModel.getWeather(for: city, unit: settings.unit.value)
         }
         .alert(item: $viewModel.alertItem) { alert in
