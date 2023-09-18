@@ -12,7 +12,6 @@ final class CityListViewModel: ObservableObject {
     
     private let service = ServiceLayer()
 
-    @Published var activeCity: City?
     @Published var alertItem: AlertItem?
     @Published var cities: [City] = []
 

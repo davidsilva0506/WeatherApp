@@ -9,43 +9,33 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
 
-    @EnvironmentObject var settings: Settings
-    @EnvironmentObject var navigation: Navigation
+    @EnvironmentObject private var settings: Settings
     
     var body: some View {
-        
-        ZStack {
             
-            Background()
+        VStack {
             
-            VStack {
-                
-                HStack {
-                    
-                    Spacer()
-                            
-                    CloseButton()
-                }
-                .padding()
-                
-                Picker(selection: $settings.unit, label: Text("Select unit")) {
-                    
-                    ForEach(UnitType.allCases, id: \.self) {
-                        
-                        Text($0.rawValue.capitalized)
-                    }
-                }
-                .padding()
-                .pickerStyle(.segmented)
-                .onChange(of: settings.unit) { _ in
-                    
-                    dismiss()
-                }
+            HStack {
                 
                 Spacer()
+                        
+                CloseButton()
             }
+            .padding()
+            
+            Picker(selection: $settings.unit, label: Text("Select unit")) {
+                
+                ForEach(UnitType.allCases, id: \.self) {
+                    
+                    Text($0.rawValue.capitalized)
+                }
+            }
+            .padding()
+            .pickerStyle(.segmented)
+            
+            Spacer()
         }
     }
 }

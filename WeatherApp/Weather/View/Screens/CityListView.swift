@@ -9,12 +9,12 @@ import SwiftUI
 
 struct CityListView: View {
     
-    @Environment(\.managedObjectContext) var context
+    @Environment(\.managedObjectContext) private var context
 
-    @EnvironmentObject var settings: Settings
-    @EnvironmentObject var navigation: Navigation
+    @EnvironmentObject private var settings: Settings
+    @EnvironmentObject private var navigation: Navigation
 
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var savedCities: FetchedResults<CityDetail>
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) private var savedCities: FetchedResults<CityDetail>
     
     @StateObject private var viewModel = CityListViewModel()
     @State private var searchTerm = ""
@@ -31,20 +31,13 @@ struct CityListView: View {
                         
                         ForEach(viewModel.cities, id: \.name) { city in
                             
-                            Button {
-                                
-                                selected(city: city)
-                                
-                            } label: {
-                                
+                            NavigationLink(destination: CityDetailView(city: city)) {
+                                    
                                 Text("\(city.name), \(city.country)")
                                     .font(.body)
                                     .fontWeight(.semibold)
                                     .scaledToFit()
                             }
-                            .buttonStyle(.bordered)
-                            .controlSize(.large)
-                            .listRowSeparator(.hidden)
                         }
                     }
                     
@@ -52,19 +45,18 @@ struct CityListView: View {
                         
                         ForEach(savedCities, id: \.name) { city in
                             
-                            Text("\(city.name), \(city.country)")
-                                .font(.body)
-                                .fontWeight(.semibold)
-                                .scaledToFit()
-                                .onTapGesture {
-                                    
-                                    let selectedCity = City(name: city.name,
-                                                            lat: city.lat,
-                                                            lon: city.lon,
-                                                            country: city.country)
-                                    
-                                    selected(city: selectedCity)
-                                }
+                            let cityDetail = City(name: city.name,
+                                                  lat: city.lat,
+                                                  lon: city.lon,
+                                                  country: city.country)
+                            
+                            NavigationLink(destination: CityDetailView(city: cityDetail)) {
+                             
+                                Text("\(cityDetail.name), \(cityDetail.country)")
+                                    .font(.body)
+                                    .fontWeight(.semibold)
+                                    .scaledToFit()
+                            }
                         }
                         .onDelete(perform: deleteCity)
 
@@ -77,26 +69,17 @@ struct CityListView: View {
                     }
                     .headerProminence(.increased)
                 }
-                .listStyle(.insetGrouped)
                 .navigationTitle("Cities")
-                .sheet(item: $navigation.activeSheet) { sheet in
-                    
-                    switch sheet {
+                .listStyle(.insetGrouped)
+                .sheet(isPresented: $navigation.isShowingSettingsView) {
                         
-                    case .cityDetailView:
-                        
-                        CityDetailView(city: $viewModel.activeCity)
-                    
-                    case .seetings:
-                        
-                        SettingsView()
-                    }
+                    SettingsView()
                 }
                 .toolbar {
 
                     Button(action: {
                         
-                        navigation.activeSheet = .seetings
+                        navigation.isShowingSettingsView = true
                         
                     }) {
                         
@@ -112,7 +95,7 @@ struct CityListView: View {
                     }
                 }
             }
-            .searchable(text: $searchTerm)
+            .searchable(text: $searchTerm, placement: .navigationBarDrawer(displayMode: .always))
             .autocorrectionDisabled(true)
             .onChange(of: searchTerm) { value in
                 
@@ -132,12 +115,6 @@ struct CityListView: View {
 }
 
 extension CityListView {
-    
-    func selected(city: City) {
-        
-        viewModel.activeCity = city
-        navigation.activeSheet = .cityDetailView
-    }
     
     func search(value: String) async {
         

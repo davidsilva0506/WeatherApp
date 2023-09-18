@@ -16,7 +16,7 @@ private enum Constants {
 
 struct CloseButton: View {
     
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         
@@ -27,7 +27,6 @@ struct CloseButton: View {
         } label: {
             
             Image(systemName: Constants.imageName)
-                .foregroundColor(.white)
                 .imageScale(.large)
                 .frame(width: Constants.imageSize, height: Constants.imageSize)
         }
