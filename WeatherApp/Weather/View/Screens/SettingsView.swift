@@ -19,28 +19,28 @@ struct SettingsView: View {
     @EnvironmentObject private var settings: Settings
     
     var body: some View {
+        
+        NavigationStack {
             
-        VStack {
-            
-            HStack {
+            VStack {
+                
+                Picker(selection: $settings.unit, label: Text(Constants.pickerLabelText)) {
+                    
+                    ForEach(UnitType.allCases, id: \.self) {
+                        
+                        Text($0.rawValue.capitalized)
+                    }
+                }
+                .padding()
+                .pickerStyle(.segmented)
                 
                 Spacer()
-                        
+            }
+            .navigationTitle("Settings")
+            .toolbar {
+                
                 CloseButton()
             }
-            .padding()
-            
-            Picker(selection: $settings.unit, label: Text(Constants.pickerLabelText)) {
-                
-                ForEach(UnitType.allCases, id: \.self) {
-                    
-                    Text($0.rawValue.capitalized)
-                }
-            }
-            .padding()
-            .pickerStyle(.segmented)
-            
-            Spacer()
         }
     }
 }

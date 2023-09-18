@@ -48,35 +48,35 @@ struct CityDetailView: View {
                     
                     Task {
                         
-                        await viewModel.saveCity(city: city,
-                                                 context: context)
+                        await self.viewModel.saveCity(city: self.city,
+                                                      context: self.context)
                     }
                     
                 } label: {
                     
-                    Text(viewModel.cityIsSaved ? Constants.buttonDisabledText : Constants.buttonEnabledText)
+                    Text(self.viewModel.cityIsSaved ? Constants.buttonDisabledText : Constants.buttonEnabledText)
                         .frame(width: Constants.buttonWidth, height: Constants.buttonHeight)
                         .font(.system(size: Constants.buttonFontSize, weight: .bold))
                         .cornerRadius(Constants.buttonCornerRadius)
                 }
                 .buttonStyle(.bordered)
-                .disabled(viewModel.cityIsSaved)
+                .disabled(self.viewModel.cityIsSaved)
                 
                 Spacer()
                 
-                MapView(city: city)
+                MapView(city: self.city)
 
                 List(viewModel.weatherDays) { day in
 
                     CityWeatherDayCell(service: self.service, weatherDay: day)
                 }
-                .navigationTitle(city.name)
+                .navigationTitle(self.city.name)
             }
         }
         .task {
             
-            viewModel.cityExists(city: city, context: context)
-            await viewModel.getWeather(for: city, unit: settings.unit.value)
+            self.viewModel.cityExists(city: self.city, context: self.context)
+            await viewModel.getWeather(for: self.city, unit: self.settings.unit.value)
         }
         .alert(item: $viewModel.alertItem) { alert in
             
@@ -85,7 +85,7 @@ struct CityDetailView: View {
                   dismissButton: alert.dismiss)
         }
 
-        if viewModel.isLoading {
+        if self.viewModel.isLoading {
                 
             Loading()
         }

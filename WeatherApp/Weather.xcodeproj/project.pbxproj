@@ -49,6 +49,7 @@
 		3054CE222AB4B7C400A352E8 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054CE212AB4B7C400A352E8 /* CoreDataService.swift */; };
 		3054CE262AB620D900A352E8 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054CE252AB620D900A352E8 /* Navigation.swift */; };
 		3054CE282AB7AC1800A352E8 /* PinnedCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3054CE272AB7AC1800A352E8 /* PinnedCity.swift */; };
+		30C471BB2AB89D6E006B35FC /* CityDetailNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C471BA2AB89D6E006B35FC /* CityDetailNavigationLink.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		3054CE212AB4B7C400A352E8 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 		3054CE252AB620D900A352E8 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		3054CE272AB7AC1800A352E8 /* PinnedCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedCity.swift; sourceTree = "<group>"; };
+		30C471BA2AB89D6E006B35FC /* CityDetailNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailNavigationLink.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 		3054CDAE2AB0B3B600A352E8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				30C471B92AB89D58006B35FC /* NavigationLinks */,
 				3054CDFF2AB36EC300A352E8 /* Screens */,
 				3054CDF82AB367E700A352E8 /* Empty */,
 				3054CDE22AB25BAE00A352E8 /* Cells */,
@@ -304,6 +307,14 @@
 			path = Environment;
 			sourceTree = "<group>";
 		};
+		30C471B92AB89D58006B35FC /* NavigationLinks */ = {
+			isa = PBXGroup;
+			children = (
+				30C471BA2AB89D6E006B35FC /* CityDetailNavigationLink.swift */,
+			);
+			path = NavigationLinks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -406,6 +417,7 @@
 				3054CDCC2AB1D79C00A352E8 /* Forecast.swift in Sources */,
 				3054CDD82AB2191300A352E8 /* ImageRequest.swift in Sources */,
 				3054CDC42AB1D01800A352E8 /* ForecastRequest.swift in Sources */,
+				30C471BB2AB89D6E006B35FC /* CityDetailNavigationLink.swift in Sources */,
 				3054CDDD2AB2433000A352E8 /* RemoteImage.swift in Sources */,
 				3054CDB32AB10A3800A352E8 /* City.swift in Sources */,
 				3054CDE72AB25C6500A352E8 /* MockData.swift in Sources */,

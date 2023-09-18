@@ -14,7 +14,6 @@ struct CityListView: View {
         static let savedCitiesSectionHeader = "Your Saved Cities"
         static let navigationTitle = "Cities"
         static let settingsImageName = "gearshape"
-        static let searchThrottle = 3
     }
 
     @Environment(\.managedObjectContext) private var context
@@ -46,44 +45,32 @@ struct CityListView: View {
                 
                 Section() {
                     
-                    ForEach(viewModel.cities, id: \.name) { city in
+                    ForEach(self.viewModel.cities, id: \.name) { city in
                         
-                        NavigationLink(destination: CityDetailView(service: self.service,
-                                                                   coreDataService: self.coreDataService,
-                                                                   city: city)) {
-                                
-                            Text("\(city.name), \(city.country)")
-                                .font(.body)
-                                .fontWeight(.semibold)
-                                .scaledToFit()
-                        }
+                        CityDetailNavigationLink(service: self.service,
+                                                 coreDataService: self.coreDataService,
+                                                 city: city)
                     }
                 }
                 
                 Section {
                     
-                    ForEach(savedCities, id: \.name) { city in
+                    ForEach(self.savedCities, id: \.name) { city in
                         
                         let cityDetail = City(name: city.name,
                                               lat: city.lat,
                                               lon: city.lon,
                                               country: city.country)
                         
-                        NavigationLink(destination: CityDetailView(service: self.service,
-                                                                   coreDataService: self.coreDataService,
-                                                                   city: cityDetail)) {
-                         
-                            Text("\(cityDetail.name), \(cityDetail.country)")
-                                .font(.body)
-                                .fontWeight(.semibold)
-                                .scaledToFit()
-                        }
+                        CityDetailNavigationLink(service: self.service,
+                                                 coreDataService: self.coreDataService,
+                                                 city: cityDetail)
                     }
                     .onDelete(perform: deleteCity)
 
                 } header: {
                     
-                    if savedCities.isEmpty == false {
+                    if self.savedCities.isEmpty == false {
                         
                         Text(Constants.savedCitiesSectionHeader)
                     }
@@ -100,7 +87,7 @@ struct CityListView: View {
 
                 Button(action: {
                     
-                    navigation.isShowingSettingsView = true
+                    self.navigation.isShowingSettingsView = true
                     
                 }) {
                     
@@ -109,8 +96,8 @@ struct CityListView: View {
             }
             .overlay {
 
-                if viewModel.cities.isEmpty &&
-                    savedCities.isEmpty {
+                if self.viewModel.cities.isEmpty &&
+                    self.savedCities.isEmpty {
 
                     EmptyCityListView()
                 }
@@ -122,7 +109,7 @@ struct CityListView: View {
             
             Task {
                 
-                await search(value: value)
+                await self.viewModel.search(searchTerm: value)
             }
         }
         .alert(item: $viewModel.alertItem) { alert in
@@ -135,19 +122,6 @@ struct CityListView: View {
 }
 
 extension CityListView {
-    
-    func search(value: String) async {
-        
-        if value.isEmpty == false,
-           value.count >= Constants.searchThrottle {
-
-            await viewModel.search(searchTerm: value)
-            
-        } else {
-            
-            viewModel.cities.removeAll()
-        }
-    }
 
     func deleteCity(at offsets: IndexSet) {
         
@@ -155,13 +129,13 @@ extension CityListView {
             
             offsets.map {
                   
-                savedCities[$0]
+                self.savedCities[$0]
                 
-            }.forEach(context.delete)
+            }.forEach(self.context.delete)
              
             Task {
              
-                await self.coreDataService.save(context: context)
+                await self.coreDataService.save(context: self.context)
             }
         }
     }

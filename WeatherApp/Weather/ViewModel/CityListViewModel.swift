@@ -10,6 +10,11 @@ import Foundation
 @MainActor
 final class CityListViewModel: ObservableObject {
     
+    private enum Constants {
+
+        static let searchThrottle = 3
+    }
+
     private let service: ServiceLayer
 
     @Published var alertItem: AlertItem?
@@ -21,6 +26,13 @@ final class CityListViewModel: ObservableObject {
     }
 
     func search(searchTerm: String) async {
+
+        guard searchTerm.isEmpty == false,
+              searchTerm.count >= Constants.searchThrottle else {
+
+            self.cities.removeAll()
+            return
+        }
 
         do {
             
