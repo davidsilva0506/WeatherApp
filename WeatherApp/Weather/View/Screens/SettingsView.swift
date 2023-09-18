@@ -9,6 +9,11 @@ import SwiftUI
 
 struct SettingsView: View {
     
+    private enum Constants {
+        
+        static let pickerLabelText = "Select unit"
+    }
+
     @Environment(\.dismiss) private var dismiss
 
     @EnvironmentObject private var settings: Settings
@@ -25,7 +30,7 @@ struct SettingsView: View {
             }
             .padding()
             
-            Picker(selection: $settings.unit, label: Text("Select unit")) {
+            Picker(selection: $settings.unit, label: Text(Constants.pickerLabelText)) {
                 
                 ForEach(UnitType.allCases, id: \.self) {
                     

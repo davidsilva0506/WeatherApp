@@ -31,10 +31,9 @@ final class CityDetailViewModel: ObservableObject {
         
         guard let city = city else { return }
        
-        isLoading = true
+        self.isLoading = true
 
         var forecast: Forecast?
-        var weatherDays = [WeatherDay]()
 
         do {
             
@@ -42,17 +41,16 @@ final class CityDetailViewModel: ObservableObject {
             
         } catch {
             
-            alertItem = AlertContext.requestFailed
+            self.alertItem = AlertContext.requestFailed
         }
 
         if let forecast = forecast {
 
             let mappedForecast = await CityDetailViewModel.mapForecast(forecast)
-            weatherDays = await CityDetailViewModel.groupByDay(mappedForecast)
+            self.weatherDays = await CityDetailViewModel.groupByDay(mappedForecast)
         }
 
         self.isLoading = false
-        self.weatherDays = weatherDays
     }
     
     func saveCity(city: City, context: NSManagedObjectContext) async {

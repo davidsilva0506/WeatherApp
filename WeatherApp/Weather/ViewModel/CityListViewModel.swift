@@ -19,11 +19,11 @@ final class CityListViewModel: ObservableObject {
 
         do {
             
-            cities = try await self.service.fetchCities(searchTerm: searchTerm) ?? []
+            self.cities = try await self.service.fetchCities(searchTerm: searchTerm) ?? []
             
         } catch {
 
-            alertItem = AlertContext.requestFailed
+            self.alertItem = AlertContext.requestFailed
         }
     }
 }

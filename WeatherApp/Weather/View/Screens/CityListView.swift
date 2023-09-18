@@ -9,6 +9,14 @@ import SwiftUI
 
 struct CityListView: View {
     
+    private enum Constants {
+        
+        static let savedCitiesSectionHeader = "Your Saved Cities"
+        static let navigationTitle = "Cities"
+        static let settingsImageName = "gearshape"
+        static let searchThrottle = 3
+    }
+
     @Environment(\.managedObjectContext) private var context
 
     @EnvironmentObject private var settings: Settings
@@ -62,12 +70,12 @@ struct CityListView: View {
                     
                     if savedCities.isEmpty == false {
                         
-                        Text("Your Saved Cities")
+                        Text(Constants.savedCitiesSectionHeader)
                     }
                 }
                 .headerProminence(.increased)
             }
-            .navigationTitle("Cities")
+            .navigationTitle(Constants.navigationTitle)
             .listStyle(.insetGrouped)
             .sheet(isPresented: $navigation.isShowingSettingsView) {
                     
@@ -81,7 +89,7 @@ struct CityListView: View {
                     
                 }) {
                     
-                    Image(systemName: "gearshape")
+                    Image(systemName: Constants.settingsImageName)
                 }
             }
             .overlay {
@@ -116,8 +124,8 @@ extension CityListView {
     func search(value: String) async {
         
         if value.isEmpty == false,
-           value.count >= 3 {
-            
+           value.count >= Constants.searchThrottle {
+
             await viewModel.search(searchTerm: value)
             
         } else {

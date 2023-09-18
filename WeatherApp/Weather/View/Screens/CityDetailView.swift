@@ -9,6 +9,16 @@ import SwiftUI
 
 struct CityDetailView: View {
     
+    private enum Constants {
+        
+        static let buttonDisabledText = "Saved"
+        static let buttonEnabledText = "Save city"
+        static let buttonWidth: CGFloat = 220
+        static let buttonHeight: CGFloat = 40
+        static let buttonFontSize: CGFloat = 22
+        static let buttonCornerRadius: CGFloat = 10
+    }
+
     @Environment(\.managedObjectContext) private var context
     @Environment(\.dismiss) private var dismiss
     
@@ -34,10 +44,10 @@ struct CityDetailView: View {
                     
                 } label: {
                     
-                    Text(viewModel.cityIsSaved ? "Saved" : "Save city")
-                        .frame(width: 220, height: 40)
-                        .font(.system(size: 22, weight: .bold))
-                        .cornerRadius(10)
+                    Text(viewModel.cityIsSaved ? Constants.buttonDisabledText : Constants.buttonEnabledText)
+                        .frame(width: Constants.buttonWidth, height: Constants.buttonHeight)
+                        .font(.system(size: Constants.buttonFontSize, weight: .bold))
+                        .cornerRadius(Constants.buttonCornerRadius)
                 }
                 .buttonStyle(.bordered)
                 .disabled(viewModel.cityIsSaved)

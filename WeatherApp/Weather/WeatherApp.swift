@@ -14,7 +14,9 @@ struct WeatherApp: App {
     @StateObject private var navigation = Navigation()
 
     var body: some Scene {
+        
         WindowGroup {
+            
             CityListView()
                 .environmentObject(settings)
                 .environmentObject(navigation)

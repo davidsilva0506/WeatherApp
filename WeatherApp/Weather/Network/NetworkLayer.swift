@@ -72,6 +72,11 @@ class NetworkLayer: NetworkLayerProtocol {
 
 private extension NetworkLayer {
 
+    private enum Constants {
+
+        static let APIKeyParamKey = "appid"
+    }
+
     private func buildURLRequest(for request: Request, includeAppId: Bool = true) async throws -> URLRequest {
 
         let URLString = "\(self.networkConfig.baseURL)/\(request.path)"
@@ -86,7 +91,8 @@ private extension NetworkLayer {
             
             let queryItems: [URLQueryItem] = params.map { param in
                 
-                return URLQueryItem(name: param.key, value: param.value)
+                return URLQueryItem(name: param.key,
+                                    value: param.value)
             }
             
             guard var components = URLComponents(string: URLString) else { throw NetworkError.invalidData }
@@ -102,7 +108,8 @@ private extension NetworkLayer {
         }
 
         var currentQueryItems = components.queryItems ?? [URLQueryItem]()
-        currentQueryItems.append(URLQueryItem(name: "appid", value: self.networkConfig.apiKey))
+        currentQueryItems.append(URLQueryItem(name: Constants.APIKeyParamKey,
+                                              value: self.networkConfig.apiKey))
         components.queryItems = currentQueryItems
         
         URLRequest.url = components.url
